@@ -7,19 +7,19 @@ import {
     MRT_TableOptions,
     useMaterialReactTable
 } from "material-react-table";
-import {User, usStates} from "@/app/components/fakeData";
-import {useCreateUser, useDeleteUser, useGetUsers, useUpdateUser} from "@/app/components/hooks";
+import {Employee, usStates} from "@/app/client/fakeData";
+import {useCreateUser, useDeleteUser, useGetUsers, useUpdateUser} from "@/app/client/hooks";
 import {Box, Button, DialogActions, DialogContent, DialogTitle, IconButton, Tooltip} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { validateUser } from "./validations";
+import { validateUser } from "../client/validations";
 
 export function EmployeesTable() {
     const [validationErrors, setValidationErrors] = useState<
         Record<string, string | undefined>
     >({});
 
-    const columns = useMemo<MRT_ColumnDef<User>[]>(
+    const columns = useMemo<MRT_ColumnDef<Employee>[]>(
         () => [
             {
                 accessorKey: 'id',
@@ -107,7 +107,7 @@ export function EmployeesTable() {
         useDeleteUser();
 
     //CREATE action
-    const handleCreateUser: MRT_TableOptions<User>['onCreatingRowSave'] = async ({
+    const handleCreateUser: MRT_TableOptions<Employee>['onCreatingRowSave'] = async ({
                                                                                      values,
                                                                                      table,
                                                                                  }) => {
@@ -122,7 +122,7 @@ export function EmployeesTable() {
     };
 
     //UPDATE action
-    const handleSaveUser: MRT_TableOptions<User>['onEditingRowSave'] = async ({
+    const handleSaveUser: MRT_TableOptions<Employee>['onEditingRowSave'] = async ({
                                                                                   values,
                                                                                   table,
                                                                               }) => {
@@ -137,7 +137,7 @@ export function EmployeesTable() {
     };
 
     //DELETE action
-    const openDeleteConfirmModal = (row: MRT_Row<User>) => {
+    const openDeleteConfirmModal = (row: MRT_Row<Employee>) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
             deleteUser(row.original.id);
         }
