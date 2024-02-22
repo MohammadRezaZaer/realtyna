@@ -1,7 +1,7 @@
 import {Employee} from "@/app/client/fakeData";
 
 
-export const employeesFakeData: Employee[] = [
+const employeesFakeData: Employee[] = [
     {
         id: '9s41rp',
         firstName: 'Kelvin',
